@@ -192,44 +192,35 @@ weather_advice()
 # - Ensure to validate input formats and handle unexpected inputs gracefully.
 
 
-def determine_season():
-        # Your control flow logic goes here
 
-    month_to_number = {
-        "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
-        "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12
-    }
+
+
+def determine_season():
+    # Prompt the user for the month
+    month = input("Enter the month of the year (Jan - Dec): ")
     
-    month = input("Enter the month of the year (Jan - Dec): ").lower
-    day = input("Enter the day of the month: ")
     
-    # Validate 
-    if month not in month_to_number:
-        print(" Please enter a valid three-letter month")
-        return
+    day = int(input("Enter the day of the month: "))
+    if day < 1 or day > 31:
+      print("Invalid day. Please enter a valid day between 1 and 31.")
+      return
+   
     
-    if not day.isdigit():
-        print(" Please enter a valid numerical day")
-        return
-    
-    day = int(day)
-    
-    # Get the numeric month نحول الاشهر لارقم 
-    month_number = month_to_number[month]
-    
-    if (month_number == 12 and day >= 21) or (1 <= month_number <= 2) or (month_number == 3 and day <= 19):
+    if (month == "Dec" and day >= 21) or month in ("Jan", "Feb") or (month == "Mar" and day <= 19):
         season = "Winter"
-    elif (month_number == 3 and day >= 20) or (4 <= month_number <= 5) or (month_number == 6 and day <= 20):
+    elif (month == "Mar" and day >= 20) or month in ("Apr", "May") or (month == "Jun" and day <= 20):
         season = "Spring"
-    elif (month_number == 6 and day >= 21) or (7 <= month_number <= 8) or (month_number == 9 and day <= 21):
+    elif (month == "Jun" and day >= 21) or month in ("Jul", "Aug") or (month == "Sep" and day <= 21):
         season = "Summer"
-    elif (month_number == 9 and day >= 22) or (10 <= month_number <= 11) or (month_number == 12 and day <= 20):
+    elif (month == "Sep" and day >= 22) or month in ("Oct", "Nov") or (month == "Dec" and day <= 20):
         season = "Fall"
     else:
-        print("Invalid date entered.")
-        return
+        season = "Invalid date"
     
-    print(month +"  "+ str(day) +"is in "+season)
+   
+    if season != "Invalid date":
+        print(month +"  "+ str(day) +"is in "+season)
 
+    
 # Call the function
 determine_season()
